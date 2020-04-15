@@ -71,12 +71,13 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomRowLinearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
         <Button
             android:id="@+id/gameButton10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="60sp"
+            android:textSize="@dimen/tile_Text_Size"
             tools:text="X" />
 
         <Button
@@ -84,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="60sp"
+            android:textSize="@dimen/tile_Text_Size"
             tools:text="O" />
 
         <Button
@@ -92,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="60sp"
+            android:textSize="@dimen/tile_Text_Size"
             tools:text="O" />
 
     </LinearLayout>
@@ -114,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="60sp"
+            android:textSize="@dimen/tile_Text_Size"
             tools:text="X" />
 
         <Button
@@ -122,7 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="60sp"
+            android:textSize="@dimen/tile_Text_Size"
             tools:text="X" />
 
         <Button
@@ -130,7 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="60sp"
+            android:textSize="@dimen/tile_Text_Size"
             tools:text="O" />
 
     </LinearLayout>
