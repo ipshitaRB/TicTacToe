@@ -61,6 +61,42 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/middleRowLinearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" >
+        <Button
+            android:id="@+id/gameButton00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/tile_Text_Size"
+            tools:text="O" />
+
+        <Button
+            android:id="@+id/gameButton01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/tile_Text_Size"
+            tools:text="O" />
+
+        <Button
+            android:id="@+id/gameButton02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/tile_Text_Size"
+            tools:text="X" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/middleRowLinearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
