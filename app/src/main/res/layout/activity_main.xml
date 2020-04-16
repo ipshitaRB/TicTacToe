@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="@dimen/tile_Text_Size"
-            tools:text="O" />
+            tools:text="@string/zero" />
 
         <Button
             android:id="@+id/gameButton01"
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="@dimen/tile_Text_Size"
-            tools:text="O" />
+            tools:text="@string/zero" />
 
         <Button
             android:id="@+id/gameButton02"
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="@dimen/tile_Text_Size"
-            tools:text="X" />
+            tools:text="@string/ex" />
 
     </LinearLayout>
 
@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="@dimen/tile_Text_Size"
-            tools:text="X" />
+            tools:text="@string/ex" />
 
         <Button
             android:id="@+id/gameButton11"
@@ -122,7 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="@dimen/tile_Text_Size"
-            tools:text="O" />
+            tools:text="@string/zero" />
 
         <Button
             android:id="@+id/gameButton12"
@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="@dimen/tile_Text_Size"
-            tools:text="O" />
+            tools:text="@string/zero" />
 
     </LinearLayout>
 
@@ -152,7 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="@dimen/tile_Text_Size"
-            tools:text="X" />
+            tools:text="@string/ex" />
 
         <Button
             android:id="@+id/gameButton21"
@@ -160,7 +160,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="@dimen/tile_Text_Size"
-            tools:text="X" />
+            tools:text="@string/ex" />
 
         <Button
             android:id="@+id/gameButton22"
@@ -168,7 +168,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="@dimen/tile_Text_Size"
-            tools:text="O" />
+            tools:text="@string/zero" />
 
     </LinearLayout>
 
