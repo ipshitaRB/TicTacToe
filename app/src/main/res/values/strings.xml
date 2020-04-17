@@ -5,4 +5,5 @@
     <string name="reset">Reset</string>
     <string name="zero">O</string>
     <string name="ex">X</string>
+    <string name="tile_played_already">This tile has already been played.</string>
 </resources>

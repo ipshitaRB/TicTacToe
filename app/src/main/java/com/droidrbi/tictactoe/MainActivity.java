@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView player2ScoreTextView;
 
     private boolean isPlayer1 = true;
+
+    private HashMap<Button, Boolean> clickedButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }
-
+        clickedButtons = new HashMap<>();
         player1ScoreTextView.setText(String.valueOf(player1Score));
         player2ScoreTextView.setText(String.valueOf(player2Score));
 
@@ -53,6 +58,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void onTileClick(View v) {
         Button button = (Button) v;
+        if(notClicked(button)){
+            updateTile(button);
+            tilePlayed(button);
+        }
+
+
+    }
+
+    private void updateTile(Button button) {
         if(isPlayer1) {
             button.setText(getString(R.string.ex));
             isPlayer1 = false;
@@ -61,6 +75,17 @@ public class MainActivity extends AppCompatActivity {
             button.setText(getString(R.string.zero));
             isPlayer1 = true;
         }
+    }
 
+    private void tilePlayed(Button button) {
+        clickedButtons.put(button, true);
+    }
+
+    private boolean notClicked(Button button) {
+        if(clickedButtons.containsKey(button)){
+            Toast.makeText(this, getString(R.string.tile_played_already), Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 }
