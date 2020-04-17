@@ -23,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean isPlayer1 = true;
 
     private HashMap<Button, Boolean> clickedButtons;
+    private int numTilesPlayed = 0;
+
+    private int[][] boardArr = new int[3][3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +59,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void initiateBoard() {
+        int i = 0,j = 0;
+        for(;i < 3; i++){
+            for(j = 0; j < 3; j++){
+                boardArr[i][j] = 0;
+            }
+        }
+    }
+
     private void onTileClick(View v) {
         Button button = (Button) v;
+
         if(notClicked(button)){
             updateTile(button);
             tilePlayed(button);
