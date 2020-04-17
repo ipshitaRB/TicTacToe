@@ -3,6 +3,7 @@ package com.droidrbi.tictactoe;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -32,12 +33,25 @@ public class MainActivity extends AppCompatActivity {
                 buttonId = "gameButton" + i + j;
 
                 buttons[i][j] = (Button) findViewById(this.getResources().getIdentifier(buttonId,packageId,getPackageName()));
+                buttons[i][j].setOnClickListener(new View.OnClickListener() {
 
+                    @Override
+                    public void onClick(View v) {
+                        onTileClick(v);
+                    }
+                });
             }
         }
 
         player1ScoreTextView.setText(String.valueOf(player1Score));
         player2ScoreTextView.setText(String.valueOf(player2Score));
+
+
+    }
+
+    private void onTileClick(View v) {
+        Button button = (Button) v;
+        button.setText(getString(R.string.ex));
 
     }
 }
