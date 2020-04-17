@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView player1ScoreTextView;
     private TextView player2ScoreTextView;
 
+    private boolean isPlayer1 = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +53,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void onTileClick(View v) {
         Button button = (Button) v;
-        button.setText(getString(R.string.ex));
+        if(isPlayer1) {
+            button.setText(getString(R.string.ex));
+            isPlayer1 = false;
+
+        }else{
+            button.setText(getString(R.string.zero));
+            isPlayer1 = true;
+        }
 
     }
 }
