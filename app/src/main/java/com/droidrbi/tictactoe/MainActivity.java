@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        player1ScoreTextView = findViewById(R.id.player1Score);
-        player2ScoreTextView = findViewById(R.id.player2Score);
+        player1ScoreTextView = (TextView) findViewById(R.id.player1Score);
+        player2ScoreTextView = (TextView) findViewById(R.id.player2Score);
 
         int i = 0, j = 0;
         String buttonId = "";
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             for(j = 0; j < 3; j++){
                 buttonId = "gameButton" + i + j;
 
-                buttons[i][j] = findViewById(this.getResources().getIdentifier(buttonId,packageId,getPackageName()));
+                buttons[i][j] = (Button) findViewById(this.getResources().getIdentifier(buttonId,packageId,getPackageName()));
 
             }
         }
