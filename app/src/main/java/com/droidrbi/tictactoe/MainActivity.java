@@ -36,5 +36,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        player1ScoreTextView.setText(String.valueOf(player1Score));
+        player2ScoreTextView.setText(String.valueOf(player2Score));
+
     }
 }
