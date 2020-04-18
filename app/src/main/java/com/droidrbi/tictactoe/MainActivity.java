@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateBoard( Button button, boolean isPlayer1) {
         int resId = button.getId();
         String resName = button.getResources().getResourceEntryName(resId);
-        Log.i("Main Activity", "resName");
+        Log.i("Main Activity", resName);
         // eg : resName = gameButton00
         int length = resName.length();
         int i = Character.getNumericValue(resName.charAt(length - 2));
