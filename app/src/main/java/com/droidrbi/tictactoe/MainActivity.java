@@ -3,6 +3,7 @@ package com.droidrbi.tictactoe;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -74,9 +75,68 @@ public class MainActivity extends AppCompatActivity {
         if(notClicked(button)){
             updateTile(button);
             tilePlayed(button);
+            hasPlayerWon();
         }
 
 
+    }
+
+
+    private void updateBoard( Button button, boolean isPlayer1) {
+        int resId = button.getId();
+        String resName = button.getResources().getResourceEntryName(resId);
+        Log.i("Main Activity", "resName");
+        // eg : resName = gameButton00
+        int length = resName.length();
+        int i = Character.getNumericValue(resName.charAt(length - 2));
+        int j = Character.getNumericValue(resName.charAt(length - 1));
+        boardArr[i][j] = isPlayer1? 2:1;
+
+
+
+
+
+    }
+
+    private boolean hasPlayerWon() {
+        numTilesPlayed++;
+        if(numTilesPlayed > 4){
+//            8 possible ways of winning 2 diagonals + 3 verticals + 3 horizontals
+
+            // check diagonals
+            if(isDiagonalAligned() || isRowAligned() || isColumnAligned()){
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    private boolean isColumnAligned() {
+        for(int col = 0; col < 3; col++){
+
+            if(boardArr[0][col] == boardArr[1][col] && boardArr[1][col] == boardArr[2][col])
+                return true;
+
+        }
+        return false;
+    }
+
+    private boolean isRowAligned() {
+        for(int row = 0; row < 3; row++){
+
+            if(boardArr[row][0] == boardArr[row][1] && boardArr[row][1] == boardArr[row][2])
+                return true;
+
+        }
+        return false;
+    }
+
+    private boolean isDiagonalAligned() {
+        if ((boardArr[0][0] == boardArr[1][1] && boardArr[1][1] == boardArr[2][2])
+        || (boardArr[2][0] == boardArr[1][1] && boardArr[1][1] == boardArr[0][2]))
+            return true;
+        return false;
     }
 
     private void updateTile(Button button) {
@@ -88,9 +148,12 @@ public class MainActivity extends AppCompatActivity {
             button.setText(getString(R.string.zero));
             isPlayer1 = true;
         }
+
+        updateBoard(button, isPlayer1);
     }
 
     private void tilePlayed(Button button) {
+
         clickedButtons.put(button, true);
     }
 
