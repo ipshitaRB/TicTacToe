@@ -90,12 +90,7 @@ public class MainActivity extends AppCompatActivity {
         int length = resName.length();
         int i = Character.getNumericValue(resName.charAt(length - 2));
         int j = Character.getNumericValue(resName.charAt(length - 1));
-        boardArr[i][j] = isPlayer1? 2:1;
-
-
-
-
-
+        boardArr[i][j] = isPlayer1? 1:2;
     }
 
     private boolean hasPlayerWon() {
@@ -103,10 +98,8 @@ public class MainActivity extends AppCompatActivity {
         if(numTilesPlayed > 4){
 //            8 possible ways of winning 2 diagonals + 3 verticals + 3 horizontals
 
-            // check diagonals
-            if(isDiagonalAligned() || isRowAligned() || isColumnAligned()){
-                return true;
-            }
+            boolean isGameWon = isDiagonalAligned() || isRowAligned() || isColumnAligned();
+            return isGameWon;
 
         }
         return false;
@@ -140,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateTile(Button button) {
+        updateBoard(button, isPlayer1);
         if(isPlayer1) {
             button.setText(getString(R.string.ex));
             isPlayer1 = false;
@@ -149,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
             isPlayer1 = true;
         }
 
-        updateBoard(button, isPlayer1);
     }
 
     private void tilePlayed(Button button) {
