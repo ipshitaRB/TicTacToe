@@ -1,13 +1,13 @@
 package com.droidrbi.tictactoe;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
 
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         player1ScoreTextView = (TextView) findViewById(R.id.player1Score);
         player2ScoreTextView = (TextView) findViewById(R.id.player2Score);
+
 
         int i = 0, j = 0;
         String buttonId = "";
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 int winner = isPlayer1Turn ? 2:1;
                 Log.i("Main Activity", "Player " + winner + " is the winner");
                 gameFinished = true;
+                showPlayerWinsMessage(winner);
                 updateScore();
             }
 
@@ -92,6 +94,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    private void showPlayerWinsMessage(int winner) {
+        String text = getString(R.string.player_wins,winner);
+        Toast.makeText(this, text,Toast.LENGTH_LONG).show();
+    }
+
 
     private boolean gameStillOn() {
         if(gameFinished){
