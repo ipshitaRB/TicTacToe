@@ -75,7 +75,15 @@ public class MainActivity extends AppCompatActivity {
         if(notClicked(button)){
             updateTile(button);
             tilePlayed(button);
-            hasPlayerWon();
+            // find which player has won
+            if(hasPlayerWon()){
+                // isPlayer1 was switched in updateTile()
+                // Therefore, if isPlayer1 is true then player 2 played the latest move and
+                // hence is the winner
+                int winner = isPlayer1? 2:1;
+                Log.i("Main Activity", "Player " + winner + " is the winner");
+            }
+
         }
 
 
@@ -108,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isColumnAligned() {
         for(int col = 0; col < 3; col++){
 
-            if(boardArr[0][col] == boardArr[1][col] && boardArr[1][col] == boardArr[2][col])
+            if(boardArr[0][col] > 0 && boardArr[0][col] == boardArr[1][col] && boardArr[1][col] == boardArr[2][col] )
                 return true;
 
         }
@@ -118,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isRowAligned() {
         for(int row = 0; row < 3; row++){
 
-            if(boardArr[row][0] == boardArr[row][1] && boardArr[row][1] == boardArr[row][2])
+            if(boardArr[row][0] > 0 && boardArr[row][0] == boardArr[row][1] && boardArr[row][1] == boardArr[row][2])
                 return true;
 
         }
@@ -127,7 +135,8 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isDiagonalAligned() {
         if ((boardArr[0][0] == boardArr[1][1] && boardArr[1][1] == boardArr[2][2])
-        || (boardArr[2][0] == boardArr[1][1] && boardArr[1][1] == boardArr[0][2]))
+        || (boardArr[2][0] == boardArr[1][1] && boardArr[1][1] == boardArr[0][2])
+        && boardArr[1][1] > 0)
             return true;
         return false;
     }
