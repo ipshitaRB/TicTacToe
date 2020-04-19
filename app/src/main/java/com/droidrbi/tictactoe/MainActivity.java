@@ -21,12 +21,14 @@ public class MainActivity extends AppCompatActivity {
     private TextView player1ScoreTextView;
     private TextView player2ScoreTextView;
 
-    private boolean isPlayer1 = true;
+    private boolean isPlayer1Turn = true;
 
     private HashMap<Button, Boolean> clickedButtons;
     private int numTilesPlayed = 0;
 
     private int[][] boardArr = new int[3][3];
+
+    private boolean gameFinished = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,13 +82,26 @@ public class MainActivity extends AppCompatActivity {
                 // isPlayer1 was switched in updateTile()
                 // Therefore, if isPlayer1 is true then player 2 played the latest move and
                 // hence is the winner
-                int winner = isPlayer1? 2:1;
+                int winner = isPlayer1Turn ? 2:1;
                 Log.i("Main Activity", "Player " + winner + " is the winner");
+                gameFinished = true;
+                updateScore();
             }
 
         }
 
 
+    }
+
+    private void updateScore() {
+
+        if(isPlayer1Turn){
+            player2Score++;
+            player2ScoreTextView.setText(String.valueOf(player2Score));
+        }else{
+            player1Score++;
+            player1ScoreTextView.setText(String.valueOf(player1Score));
+        }
     }
 
 
@@ -142,14 +157,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateTile(Button button) {
-        updateBoard(button, isPlayer1);
-        if(isPlayer1) {
+        updateBoard(button, isPlayer1Turn);
+        if(isPlayer1Turn) {
             button.setText(getString(R.string.ex));
-            isPlayer1 = false;
+            isPlayer1Turn = false;
 
         }else{
             button.setText(getString(R.string.zero));
-            isPlayer1 = true;
+            isPlayer1Turn = true;
         }
 
     }
