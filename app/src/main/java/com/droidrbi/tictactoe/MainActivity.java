@@ -71,6 +71,40 @@ public class MainActivity extends AppCompatActivity {
         initiateBoard();
     }
 
+
+    private void reset() {
+        gameFinished = false;
+        clearBoardArr();
+        clearClickedButtonsList();
+        unclickTiles();
+        numTilesPlayed = 0;
+        isPlayer1Turn = true;
+    }
+
+    private void clearBoardArr(){
+        int i = 0, j = 0;
+        for (; i < 3;i++){
+            for(j = 0; j < 3;j++){
+                boardArr[i][j] = 0;
+            }
+        }
+    }
+
+    private void clearClickedButtonsList(){
+        clickedButtons.clear();
+    }
+
+    private void unclickTiles(){
+        int i = 0, j = 0;
+        for (; i < 3;i++){
+            for(j = 0; j < 3;j++){
+                buttons[i][j].setText("");
+            }
+        }
+    }
+
+
+
     private void initiateBoard() {
         int i = 0,j = 0;
         for(;i < 3; i++){
