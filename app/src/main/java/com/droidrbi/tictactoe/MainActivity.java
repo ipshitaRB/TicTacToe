@@ -7,11 +7,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String PLAYER_1_SCORE = "PLAYER 1 SCORE";
+    private static final String PLAYER_2_SCORE = "PLAYER 2 SCORE";
 
     private Button[][] buttons = new Button[3][3];
     private Button resetButton;
@@ -70,6 +74,15 @@ public class MainActivity extends AppCompatActivity {
 
         initiateBoard();
     }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(PLAYER_1_SCORE, player1Score);
+        outState.putInt(PLAYER_2_SCORE, player2Score);
+
+    }
+
 
 
     private void reset() {
