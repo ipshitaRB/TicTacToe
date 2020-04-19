@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     private void onTileClick(View v) {
         Button button = (Button) v;
 
-        if(notClicked(button)){
+        if(gameStillOn() && notClicked(button)){
             updateTile(button);
             tilePlayed(button);
             // find which player has won
@@ -91,6 +91,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    private boolean gameStillOn() {
+        if(gameFinished){
+            //toast game finished press reset to start a new game
+            Toast.makeText(this, getString(R.string.game_finished), Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
     private void updateScore() {
