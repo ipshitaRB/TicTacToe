@@ -147,10 +147,18 @@ public class MainActivity extends AppCompatActivity {
 //            8 possible ways of winning 2 diagonals + 3 verticals + 3 horizontals
 
             boolean isGameWon = isDiagonalAligned() || isRowAligned() || isColumnAligned();
+            if(numTilesPlayed == 9 && !isGameWon){
+                nobodyWon();
+            }
             return isGameWon;
 
         }
+
         return false;
+    }
+
+    private void nobodyWon() {
+        Toast.makeText(this, getString(R.string.nobody_won), Toast.LENGTH_LONG).show();
     }
 
     private boolean isColumnAligned() {
