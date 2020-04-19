@@ -14,6 +14,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     private Button[][] buttons = new Button[3][3];
+    private Button resetButton;
 
     private int player1Score = 0;
     private int player2Score = 0;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         player1ScoreTextView = (TextView) findViewById(R.id.player1Score);
         player2ScoreTextView = (TextView) findViewById(R.id.player2Score);
 
+        resetButton = (Button)findViewById(R.id.resetButton);
 
         int i = 0, j = 0;
         String buttonId = "";
