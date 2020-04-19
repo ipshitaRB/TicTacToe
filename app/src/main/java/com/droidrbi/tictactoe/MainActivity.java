@@ -40,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
         player2ScoreTextView = (TextView) findViewById(R.id.player2Score);
 
         resetButton = (Button)findViewById(R.id.resetButton);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reset();
+            }
+        });
 
         int i = 0, j = 0;
         String buttonId = "";
