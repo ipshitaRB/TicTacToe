@@ -69,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         clickedButtons = new HashMap<>();
+        if(savedInstanceState != null){
+            player1Score = savedInstanceState.getInt(PLAYER_1_SCORE);
+            player2Score = savedInstanceState.getInt(PLAYER_2_SCORE);
+        }
         player1ScoreTextView.setText(String.valueOf(player1Score));
         player2ScoreTextView.setText(String.valueOf(player2Score));
 
