@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isPlayer1Turn = true;
 
-    private HashMap<Button, Boolean> clickedButtons;
+    private HashMap<Integer, Boolean> clickedButtons;
     private int numTilesPlayed = 0;
 
     private int[][] boardArr = new int[3][3];
@@ -240,11 +240,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void tilePlayed(Button button, boolean isPlayer1Turn) {
 
-        clickedButtons.put(button, isPlayer1Turn);
+        clickedButtons.put(button.getId(), isPlayer1Turn);
     }
 
     private boolean notClicked(Button button) {
-        if(clickedButtons.containsKey(button)){
+        if (clickedButtons.containsKey(button.getId())) {
             Toast.makeText(this, getString(R.string.tile_played_already), Toast.LENGTH_LONG).show();
             return false;
         }
