@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String PLAYER_2_SCORE = "PLAYER 2 SCORE";
 
     private Button[][] buttons = new Button[3][3];
-    private Button resetButton;
 
     private int player1Score = 0;
     private int player2Score = 0;
@@ -40,32 +39,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        player1ScoreTextView = (TextView) findViewById(R.id.player1Score);
-        player2ScoreTextView = (TextView) findViewById(R.id.player2Score);
+        player1ScoreTextView = findViewById(R.id.player1Score);
+        player2ScoreTextView = findViewById(R.id.player2Score);
 
-        resetButton = (Button)findViewById(R.id.resetButton);
-        resetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                reset();
-            }
-        });
+        Button resetButton = findViewById(R.id.resetButton);
 
-        int i = 0, j = 0;
-        String buttonId = "";
+        resetButton.setOnClickListener((view) -> reset());
+
+        int i = 0, j;
+        String buttonId;
         String packageId = "id";
         for(; i < 3; i++){
             for(j = 0; j < 3; j++){
                 buttonId = "gameButton" + i + j;
 
-                buttons[i][j] = (Button) findViewById(this.getResources().getIdentifier(buttonId,packageId,getPackageName()));
-                buttons[i][j].setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        onTileClick(v);
-                    }
-                });
+                buttons[i][j] = findViewById(this.getResources().getIdentifier(buttonId, packageId, getPackageName()));
+                buttons[i][j].setOnClickListener(this::onTileClick);
             }
         }
         clickedButtons = new HashMap<>();
@@ -232,11 +221,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isDiagonalAligned() {
-        if ((boardArr[0][0] == boardArr[1][1] && boardArr[1][1] == boardArr[2][2])
-        || (boardArr[2][0] == boardArr[1][1] && boardArr[1][1] == boardArr[0][2])
-        && boardArr[1][1] > 0)
-            return true;
-        return false;
+        return (boardArr[0][0] == boardArr[1][1] && boardArr[1][1] == boardArr[2][2])
+                || (boardArr[2][0] == boardArr[1][1] && boardArr[1][1] == boardArr[0][2])
+                && boardArr[1][1] > 0;
     }
 
     private void updateTile(Button button) {
@@ -244,7 +231,6 @@ public class MainActivity extends AppCompatActivity {
         if(isPlayer1Turn) {
             button.setText(getString(R.string.ex));
             isPlayer1Turn = false;
-
         }else{
             button.setText(getString(R.string.zero));
             isPlayer1Turn = true;
