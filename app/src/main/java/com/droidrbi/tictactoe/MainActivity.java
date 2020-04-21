@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void clearBoardArr(){
-        int i = 0, j = 0;
+        int i = 0, j;
         for (; i < 3;i++){
             for(j = 0; j < 3;j++){
                 boardArr[i][j] = 0;
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void unclickTiles(){
-        int i = 0, j = 0;
+        int i = 0, j;
         for (; i < 3;i++){
             for(j = 0; j < 3;j++){
                 buttons[i][j].setText("");
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initiateBoard() {
-        int i = 0,j = 0;
+        int i = 0, j;
         for(;i < 3; i++){
             for(j = 0; j < 3; j++){
                 boardArr[i][j] = 0;
