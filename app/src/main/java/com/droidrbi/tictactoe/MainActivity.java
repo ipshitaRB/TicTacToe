@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putInt(PLAYER_1_SCORE, player1Score);
         outState.putInt(PLAYER_2_SCORE, player2Score);
-
     }
 
 
@@ -135,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
         Button button = (Button) v;
 
         if(gameStillOn() && notClicked(button)){
+            tilePlayed(button, isPlayer1Turn);
             updateTile(button);
-            tilePlayed(button);
             // find which player has won
             if(hasPlayerWon()){
                 // isPlayer1 was switched in updateTile()
@@ -253,9 +252,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void tilePlayed(Button button) {
+    private void tilePlayed(Button button, boolean isPlayer1Turn) {
 
-        clickedButtons.put(button, true);
+        clickedButtons.put(button, isPlayer1Turn);
     }
 
     private boolean notClicked(Button button) {
