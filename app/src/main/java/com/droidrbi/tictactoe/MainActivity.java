@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String PLAYER_1_SCORE = "PLAYER 1 SCORE";
     private static final String PLAYER_2_SCORE = "PLAYER 2 SCORE";
+    private static final String CLICKED_BUTTON_IDS = "Button ids";
 
     private Button[][] buttons = new Button[3][3];
 
@@ -61,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
         if(savedInstanceState != null){
             player1Score = savedInstanceState.getInt(PLAYER_1_SCORE);
             player2Score = savedInstanceState.getInt(PLAYER_2_SCORE);
+            int[] clickedButtonIds = savedInstanceState.getIntArray(CLICKED_BUTTON_IDS);
+            if (clickedButtonIds != null) {
+                for (int id :
+                        clickedButtonIds) {
+                    Log.d("Main Activity", String.valueOf(id));
+                }
+            }
         }
         player1ScoreTextView.setText(String.valueOf(player1Score));
         player2ScoreTextView.setText(String.valueOf(player2Score));
@@ -73,8 +81,27 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putInt(PLAYER_1_SCORE, player1Score);
         outState.putInt(PLAYER_2_SCORE, player2Score);
+        // save clicked buttons
+        int[] buttonIds = getButtonIds();
+
+        outState.putIntArray(CLICKED_BUTTON_IDS, buttonIds);
+
+        // save player turn
+        // save X and O information
+
     }
 
+    private int[] getButtonIds() {
+
+        int[] buttonIds = new int[clickedButtons.keySet().size()];
+        int pos = 0;
+        for (int buttonId :
+                clickedButtons.keySet()) {
+            buttonIds[pos] = buttonId;
+            pos++;
+        }
+        return buttonIds;
+    }
 
 
     private void reset() {
