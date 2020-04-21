@@ -10,13 +10,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String PLAYER_1_SCORE = "PLAYER 1 SCORE";
     private static final String PLAYER_2_SCORE = "PLAYER 2 SCORE";
     private static final String CLICKED_BUTTON_IDS = "Button ids";
+    private static final String PLAYER_MOVES = "Player moves";
+    private static final String IS_PLAYER_1_TURN = "Player 1";
+    private static final String NUM_TILES_PLAYED = "Num tiles played";
+    private static final String IS_GAME_OVER = "game over";
 
     private Button[][] buttons = new Button[3][3];
 
@@ -28,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isPlayer1Turn = true;
 
-    private HashMap<Integer, Boolean> clickedButtons;
+    private LinkedHashMap<Integer, Boolean> clickedButtons;
     private int numTilesPlayed = 0;
 
     private int[][] boardArr = new int[3][3];
@@ -58,22 +62,61 @@ public class MainActivity extends AppCompatActivity {
                 buttons[i][j].setOnClickListener(this::onTileClick);
             }
         }
-        clickedButtons = new HashMap<>();
+        clickedButtons = new LinkedHashMap<>();
         if(savedInstanceState != null){
             player1Score = savedInstanceState.getInt(PLAYER_1_SCORE);
             player2Score = savedInstanceState.getInt(PLAYER_2_SCORE);
             int[] clickedButtonIds = savedInstanceState.getIntArray(CLICKED_BUTTON_IDS);
-            if (clickedButtonIds != null) {
+            boolean[] playerMoves = savedInstanceState.getBooleanArray(PLAYER_MOVES);
+            if (clickedButtonIds != null && playerMoves != null) {
                 for (int id :
                         clickedButtonIds) {
                     Log.d("Main Activity", String.valueOf(id));
                 }
+                for (boolean isPlayer1 :
+                        playerMoves) {
+                    Log.d("Main Activity", "isPlayer1 " + isPlayer1);
+                }
+                for (int pos = 0; pos < clickedButtonIds.length; pos++) {
+                    clickedButtons.put(clickedButtonIds[pos], playerMoves[pos]);
+                }
+                restoreBoard();
+                isPlayer1Turn = savedInstanceState.getBoolean(IS_PLAYER_1_TURN);
+                gameFinished = savedInstanceState.getBoolean(IS_GAME_OVER);
+                numTilesPlayed = savedInstanceState.getInt(NUM_TILES_PLAYED);
             }
+
+        } else {
+            initiateBoard();
         }
         player1ScoreTextView.setText(String.valueOf(player1Score));
         player2ScoreTextView.setText(String.valueOf(player2Score));
 
-        initiateBoard();
+    }
+
+    private void restoreBoard() {
+        for (int buttonId :
+                clickedButtons.keySet()) {
+            String resName = getResources().getResourceEntryName(buttonId);
+
+            int length = resName.length();
+            int i = Character.getNumericValue(resName.charAt(length - 2));
+            int j = Character.getNumericValue(resName.charAt(length - 1));
+            boardArr[i][j] = clickedButtons.get(buttonId) ? 1 : 2;
+        }
+        int j, i = 0;
+        for (; i < 3; i++) {
+            for (j = 0; j < 3; j++) {
+                if (boardArr[i][j] == 1) {
+                    buttons[i][j].setText(getString(R.string.ex));
+                } else if (boardArr[i][j] == 2) {
+                    buttons[i][j].setText(getString(R.string.zero));
+                }
+
+            }
+        }
+
+
     }
 
     @Override
@@ -83,12 +126,31 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt(PLAYER_2_SCORE, player2Score);
         // save clicked buttons
         int[] buttonIds = getButtonIds();
-
         outState.putIntArray(CLICKED_BUTTON_IDS, buttonIds);
 
-        // save player turn
-        // save X and O information
+        // save player moves
+        boolean[] playerMoves = getPlayerMoves(buttonIds);
+        outState.putBooleanArray(PLAYER_MOVES, playerMoves);
 
+        //save player turn
+        outState.putBoolean(IS_PLAYER_1_TURN, isPlayer1Turn);
+
+        //save number of tiles played
+        outState.putInt(NUM_TILES_PLAYED, numTilesPlayed);
+
+        //save is game over
+        outState.putBoolean(IS_GAME_OVER, gameFinished);
+
+
+    }
+
+    private boolean[] getPlayerMoves(int[] buttonIds) {
+        boolean[] playerMoves = new boolean[buttonIds.length];
+        int pos = 0;
+        for (; pos < buttonIds.length; pos++) {
+            playerMoves[pos] = clickedButtons.get(buttonIds[pos]);
+        }
+        return playerMoves;
     }
 
     private int[] getButtonIds() {
