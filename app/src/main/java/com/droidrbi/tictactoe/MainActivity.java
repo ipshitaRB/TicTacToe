@@ -334,9 +334,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isDiagonalAligned() {
-        return (boardArr[0][0] == boardArr[1][1] && boardArr[1][1] == boardArr[2][2])
-                || (boardArr[2][0] == boardArr[1][1] && boardArr[1][1] == boardArr[0][2])
-                && boardArr[1][1] > 0;
+        return (boardArr[1][1] > 0) && ((boardArr[0][0] == boardArr[1][1] && boardArr[1][1] == boardArr[2][2])
+                || (boardArr[2][0] == boardArr[1][1] && boardArr[1][1] == boardArr[0][2]));
     }
 
     private void updateTile(Button button) {
