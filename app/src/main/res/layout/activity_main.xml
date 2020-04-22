@@ -21,12 +21,11 @@
         android:id="@+id/player2_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/player_2"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1Label" />
+        app:layout_constraintBaseline_toBaselineOf="@id/player1Label"
+        app:layout_constraintEnd_toStartOf="@+id/player2Score" />
 
     <TextView
         android:id="@+id/player1Score"
@@ -43,22 +42,12 @@
         android:id="@+id/player2Score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@id/player2_label"
-        app:layout_constraintStart_toEndOf="@+id/player2_label"
-        tools:text="17" />
-
-    <Button
-        android:id="@+id/resetButton"
-        android:layout_width="84dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/reset"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:text="17" />
 
     <LinearLayout
         android:id="@+id/topRowLinearLayout"

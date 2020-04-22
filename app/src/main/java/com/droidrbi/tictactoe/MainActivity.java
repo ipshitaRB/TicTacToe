@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -49,9 +50,6 @@ public class MainActivity extends AppCompatActivity {
         player1ScoreTextView = findViewById(R.id.player1Score);
         player2ScoreTextView = findViewById(R.id.player2Score);
 
-        Button resetButton = findViewById(R.id.resetButton);
-
-        resetButton.setOnClickListener((view) -> reset());
 
         int i = 0, j;
         String buttonId;
@@ -103,6 +101,15 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if (item.getItemId() == R.id.reset_menu) {
+            reset();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void restoreBoard() {
         for (int buttonId :
                 clickedButtons.keySet()) {
@@ -115,6 +122,14 @@ public class MainActivity extends AppCompatActivity {
         }
         int j, i = 0;
         for (; i < 3; i++) {
+            for (j = 0; j < 3; j++) {
+                if (boardArr[i][j] != 1 && boardArr[i][j] != 2) {
+                    boardArr[i][j] = 0;
+                }
+
+            }
+        }
+        for (i = 0; i < 3; i++) {
             for (j = 0; j < 3; j++) {
                 if (boardArr[i][j] == 1) {
                     buttons[i][j].setText(getString(R.string.ex));
