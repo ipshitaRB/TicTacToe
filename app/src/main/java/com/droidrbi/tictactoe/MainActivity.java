@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         String packageId = "id";
         for(; i < 3; i++){
             for(j = 0; j < 3; j++){
-                buttonId = "gameButton" + i + j;
+                buttonId = "button_" + i + j;
 
                 buttons[i][j] = findViewById(this.getResources().getIdentifier(buttonId, packageId, getPackageName()));
                 buttons[i][j].setOnClickListener(this::onTileClick);
@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
         Button button = (Button) v;
 
         if(gameStillOn() && notClicked(button)){
-            tilePlayed(button, isPlayer1Turn);
+
             updateTile(button);
             // find which player has won
             if(hasPlayerWon()){
@@ -350,16 +350,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void tilePlayed(Button button, boolean isPlayer1Turn) {
-
-        clickedButtons.put(button.getId(), isPlayer1Turn);
-    }
 
     private boolean notClicked(Button button) {
         if (clickedButtons.containsKey(button.getId())) {
             Toast.makeText(this, getString(R.string.tile_played_already), Toast.LENGTH_LONG).show();
             return false;
         }
+        clickedButtons.put(button.getId(), isPlayer1Turn);
         return true;
     }
 }

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="tile_Text_Size">48sp</dimen>
+    <dimen name="tile_size">90dp</dimen>
+    <dimen name="button_padding">8dp</dimen>
+    <dimen name="table_padding">8dp</dimen>
+    <dimen name="tile_margin">8dp</dimen>
+    <dimen name="corner_radius">8dp</dimen>
 </resources>
