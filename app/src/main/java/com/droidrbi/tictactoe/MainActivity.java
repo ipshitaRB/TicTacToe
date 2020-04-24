@@ -1,5 +1,7 @@
 package com.droidrbi.tictactoe;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -24,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String IS_PLAYER_1_TURN = "Player 1";
     private static final String NUM_TILES_PLAYED = "Num tiles played";
     private static final String IS_GAME_OVER = "game over";
+    private static final String PLAYER_1 = "player 1 shared preference key";
+    private static final String PLAYER_2 = "player 2 shared preference key";
+
+    private SharedPreferences mPreferences;
 
     private Button[][] buttons = new Button[3][3];
 
@@ -62,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
                 buttons[i][j].setOnClickListener(this::onTileClick);
             }
         }
+
+        mPreferences = this.getPreferences(Context.MODE_PRIVATE);
+
+        player1Score = mPreferences.getInt(PLAYER_1, player1Score);
+        player2Score = mPreferences.getInt(PLAYER_2, player2Score);
+
         clickedButtons = new LinkedHashMap<>();
         if(savedInstanceState != null){
             player1Score = savedInstanceState.getInt(PLAYER_1_SCORE);
@@ -141,6 +153,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(PLAYER_1, player1Score);
+        editor.putInt(PLAYER_2, player2Score);
+        editor.commit();
     }
 
     @Override
